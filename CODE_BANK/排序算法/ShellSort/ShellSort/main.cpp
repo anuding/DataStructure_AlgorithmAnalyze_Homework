@@ -1,16 +1,14 @@
+
 /*
 * -----------------------------------------------------------
 *  Copyright (c) 2017 anuding.github.io All rights reserved.
 * -----------------------------------------------------------
 *
 *        创建者：  anuding
-*      创建时间：  2017/10/30 10:30:23
+*      创建时间：  2017/10/31 15:55:43
 *          CLR：  4.0.30319.42000
 *
 */
-
-
-
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
@@ -18,71 +16,79 @@
 #include<time.h>
 #include<stdio.h>
 #include<stdlib.h>
-//#define N 100000000
 #define N 100000
-static long long int swaptimes=0;
+static long long int swaptimes = 0;
 static long long int comparetimes = 0;
 static double totaltime;
 static clock_t start, finish;
 
 using namespace std;
 
-template<typename E>
-void insertsort(E A[], int n)
-{
-	for (int i = 1; i < n; i++)
-		for (int j = i; (comparetimes++) && (j > 0) && (A[j] < A[j - 1]); j--)
+
+// Modified version of Insertion Sort for varying increments
+template <typename E>
+void inssort2(E A[], int n, int incr) {
+	for (int i = incr; i<n; i += incr)
+		for (int j = i; (comparetimes++)&&(j >= incr) &&
+			((A[j] > A[j - incr])); j -= incr)
 		{
-			swap(A[j], A[j - 1]);
+			swap(A[j], A[j - incr]);
 			swaptimes++;
 		}
 }
-
+template <typename E>
+void shellsort(E A[], int n) { // Shellsort
+	for (int i = n / 2; i>2; i /= 2) // For each increment
+		for (int j = 0; j<i; j++) // Sort each sublist
+			inssort2<E>(&A[j], n - j, i);
+	inssort2<E>(A, n, 1);
+}
 
 
 int main()
 {
 	void printresult();
-	
+
 	int *ori, *temp;
 	ori = new int[N];//存放在堆上
 	srand((unsigned)time(NULL)); //用当前系统时间设置种子
 
 
-	//平均情况
+								 //平均情况
 	for (int i = 0; i < N; i++)
 	{
 		int k = rand() % (N + 1);
 		ori[i] = k;
-	
+
 	}
 	start = clock();
-	insertsort<int>(ori, N);
+	shellsort<int>(ori, N);
 	finish = clock();
 	cout << "平均情况下:" << endl;
 	printresult();
 	cout << endl;
 
-	
+
 
 
 	//最好情况
-	for (int i = 0; i < N; i++)
-		ori[i] = i;
+	for (int i = 0, k = N; i < N; i++, k--)
+		ori[i] = k;
 	start = clock();
-	insertsort<int>(ori, N);
+	shellsort<int>(ori, N);
 	finish = clock();
 	cout << "最好情况下:" << endl;
 	printresult();
-	cout << endl;
+
+
 
 
 
 	//最差情况
-	for (int i = 0,k=N; i < N; i++,k--)
-		ori[i] = k;	
+	for (int i = 0; i < N; i++)
+		ori[i] = i;
 	start = clock();
-	insertsort<int>(ori, N);
+	shellsort<int>(ori, N);
 	finish = clock();
 	cout << "最差情况下:" << endl;
 	printresult();
@@ -100,5 +106,3 @@ void printresult()
 	comparetimes = 0;
 	cout << endl;
 }
-
-

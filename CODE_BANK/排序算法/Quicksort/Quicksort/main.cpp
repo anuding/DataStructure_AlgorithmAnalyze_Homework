@@ -5,7 +5,7 @@
 #include<time.h>
 #include<stdio.h>
 #include<stdlib.h>
-#define N 50
+#define N 100000
 static long long int swaptimes = 0;
 static long long int comparetimes = 0;
 static double totaltime;
@@ -78,25 +78,27 @@ int main()
 
 
 	//最好情况
-	for (int i = 0; i < N; i++)
-		ori[i] = i;
-	start = clock();
-	qsort<int>(ori, 0, N);
-	finish = clock();
-	cout << "最好情况下:" << endl;
-	printresult();
-	cout << endl;
-
-
-
-	//最差情况
 	for (int i = 0, k = N; i < N; i++, k--)
 		ori[i] = k;
 	start = clock();
 	qsort<int>(ori, 0, N);
 	finish = clock();
+	cout << "最好情况下:" << endl;
+	printresult();
+
+	
+
+
+
+	//最差情况
+	for (int i = 0; i < N; i++)
+		ori[i] = i;
+	start = clock();
+	qsort<int>(ori, 0, N);
+	finish = clock();
 	cout << "最差情况下:" << endl;
 	printresult();
+	cout << endl;
 	return 0;
 }
 
