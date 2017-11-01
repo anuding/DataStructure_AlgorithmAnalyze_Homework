@@ -97,7 +97,6 @@ int main()
 	finish = clock();
 	cout << "最差情况下:" << endl;
 	printresult();
-	cout << endl;
 	return 0;
 }
 
