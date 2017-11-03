@@ -9,10 +9,11 @@ private:
 	void siftdown(int pos) {
 		while (!isLeaf(pos)) { // Stop if pos is a leaf
 			int j = leftchild(pos); int rc = rightchild(pos);
-			if ((rc < n) && (Heap[rc]> Heap[j]))
+			if ((comparetimes++)&&(rc < n) && (Heap[rc]> Heap[j]))
 				j = rc; // Set j to greater child¡¯s value
-			if (Heap[pos]> Heap[j]) return; // Done
+			if ((comparetimes++) && Heap[pos]> Heap[j]) return; // Done
 			swap(Heap[pos], Heap[j]);
+			swaptimes++;
 			pos = j; // Move down
 		}
 	}
@@ -62,6 +63,7 @@ public:
 	E removefirst() {
 		assert(n > 0, "Heap is empty");
 		swap(Heap[0], Heap[--n]); // Swap first with last value
+		swaptimes++;
 		if (n != 0) siftdown(0); // Siftdown new root val
 		return Heap[n]; // Return deleted value
 	}
