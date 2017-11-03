@@ -17,7 +17,7 @@
 #include<time.h>
 #include<stdio.h>
 #include<stdlib.h>
-#define N 10000
+#define N 100
 static long long int swaptimes = 0;
 static long long int comparetimes = 0;
 static double totaltime;
@@ -30,25 +30,32 @@ void radixsort(E A[])
 {
 	int box[10][N];//box用来存储每种余数的数据，box[4][0]表示余数为4的第一个数据
 	int flag[10] = {0};//flag表示每种余数的数据总量，flag[4]==5表示共有5个余数为4的数据
-	int bit = N / 10;
-	for (int i = 0; i<N; i++)
+	int bit = 10;
+	while (bit * 10 == N)
 	{
-		int temp = A[i] % 10;
-		box[temp][flag[temp]] = A[i];
-		flag[temp]++;
+		for (int i = 0; i<N; i++)
+		{
+			int temp = A[i] % bit;
+			box[temp][flag[temp]] = A[i];
+			flag[temp]++;
+		}
+
+		int num = 0;
+		for (int k = 0; k<10; k++)
+			for (int i = 0; i < 10; i++)
+				for (int j = 0; j < flag[i]; j++)
+				{
+					if (k == box[i][j] / 10)
+					{
+						A[num] = box[i][j];
+						num++;
+					}
+				}
+		bit = bit * 10;
 	}
 	
-	int num=0;
-	for(int k=0;k<10;k++)
-		for (int i = 0; i < 10; i++)
-			for (int j = 0; j < flag[i]; j++)
-			{
-				if (k == box[i][j] / 10)
-				{
-					A[num] = box[i][j];
-					num++;
-				}
-			}
+	
+	
 
 
 	/*for (int i = 0; i < 10; i++)
