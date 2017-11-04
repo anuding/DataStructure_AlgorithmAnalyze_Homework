@@ -17,7 +17,7 @@
 #include<time.h>
 #include<stdio.h>
 #include<stdlib.h>
-#define N 100
+#define N 1000000
 static long long int swaptimes = 0;
 static long long int comparetimes = 0;
 static double totaltime;
