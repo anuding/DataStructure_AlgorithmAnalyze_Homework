@@ -28,7 +28,7 @@ void mergesort(E A[], E temp[], int left, int right) {
 			A[curr] = temp[i2++];
 		else if (i2 > right) // Right sublist exhausted
 			A[curr] = temp[i1++];
-		else if ((temp[i1]>temp[i2]))
+		else if ((comparetimes++)&&(temp[i1]>temp[i2]))
 			A[curr] = temp[i1++];
 		else A[curr] = temp[i2++];
 	}

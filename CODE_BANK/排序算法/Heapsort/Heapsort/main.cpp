@@ -6,7 +6,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include "maxheap.h"
-#define N 50
+#define N 100000
 static long long int swaptimes = 0;
 static long long int comparetimes = 0;
 static double totaltime;
