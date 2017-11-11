@@ -41,5 +41,11 @@
     <ClInclude Include="LList.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="minheap.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DijkElem.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

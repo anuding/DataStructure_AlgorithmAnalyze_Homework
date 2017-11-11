@@ -3,10 +3,13 @@
 #include <iostream>
 #include <cstdio>
 #include "Graphl.h"
+#include "DijkElem.h"
+#include "minheap.h"
 using namespace std;
 
 int main()
 {
+	void DijkstrawithQ(Graph* G, int* D, int s);
 	void Dijkstra(Graphl* G, int *D, int s);
 	int minVertex(Graphl* G, int *D);
 	Graphl g1(5);
@@ -17,7 +20,8 @@ int main()
 	g1.setEdge(1, 3, 5);
 	g1.setEdge(2, 4, 15);
 	g1.setEdge(3, 4, 11);
-	int *D,s;
+	int *D,s=0;
+	D = new int[g1.n()];
 	Dijkstra(&g1, D, s);
 	for (int i = 0; i < g1.n(); i++)
 		cout << D[i] << " ";
@@ -52,3 +56,33 @@ void Dijkstra(Graphl* G, int *D, int s)
 	}
 }
 
+
+
+////WTF!!!!!!!!!!!!!
+// Dijkstra¡¯s shortest paths algorithm with priority queue
+void DijkstrawithQ(Graph* G, int* D, int s) {
+	int i, v, w; // v is current vertex
+	DijkElem temp;
+	DijkElem E[G->e()]; // Heap array with lots of space
+	temp.distance = 0; temp.vertex = s;
+	E[0] = temp; // Initialize heap array
+	heap<DijkElem, DDComp> H(E, 1, G->e()); // Create heap
+	for (int i = 0; i<G->n(); i++) // Initialize
+		D[i] = INFINITY;
+	D[0] = 0;
+	for (i = 0; i<G->n(); i++) { // Now, get distances
+		do {
+			if (H.size() == 0) return; // Nothing to remove
+			temp = H.removefirst();
+			v = temp.vertex;
+		} while (G->getMark(v) == VISITED);
+		G->setMark(v, VISITED);
+		if (D[v] == INFINITY) return; // Unreachable vertices
+		for (w = G->first(v); w<G->n(); w = G->next(v, w))
+			if (D[w] >(D[v] + G->weight(v, w))) { // Update D
+				D[w] = D[v] + G->weight(v, w);
+				temp.distance = D[w]; temp.vertex = w;
+				H.insert(temp); // Insert new distance in heap
+			}
+	}
+}

@@ -115,12 +115,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AQueue.h" />
+    <ClInclude Include="DijkElem.h" />
     <ClInclude Include="Edge.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="Graphl.h" />
     <ClInclude Include="Link.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="LList.h" />
+    <ClInclude Include="minheap.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
