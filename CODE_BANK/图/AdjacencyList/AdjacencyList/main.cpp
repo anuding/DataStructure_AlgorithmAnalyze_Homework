@@ -28,17 +28,37 @@ int main()
 	cout << "节点数:"<<test.n() << endl;
 	cout << "边数:" << test.e() << endl<<endl;
 	//设置边
-	cout << "设置3条权为1的边...(1,2),(1,3),(2,3)" << endl<<endl;
-	test.setEdge(1, 2, 1);
-	test.setEdge(3, 1, 1);
-	test.setEdge(1, 3, 1);
-	test.setEdge(2, 3, 1);
+	//cout << "设置3条权为1的边...(1,2),(1,3),(2,3)" << endl<<endl;
+	test.setEdge(0, 1, 10);
+	test.setEdge(0, 5, 2);
+	test.setEdge(0, 3, 20);
+	test.setEdge(1, 2, 3);
+	test.setEdge(1, 3, 5);
+	test.setEdge(2, 4, 15);
+	test.setEdge(3, 5, 10);
+	test.setEdge(3, 4, 11);
+	test.setEdge(5, 4, 3);
+
 	cout << "节点数:" << test.n() << endl;
 	cout << "边数:" << test.e() << endl<<endl;
-
-
-	for (int i = 0; i < 6; i++)
-		cout << "节点" << i << "的第一个邻居:" << test.first(i) << endl;
+	test.printgrpah();
+	//cout << "输出n值表示该节点没有邻居节点"<<endl;
+	/*for (int i = 0; i < test.n(); i++)
+	{
+		cout << i+1<< "->";
+		int temp = i,
+			temp1= test.first(temp);
+		if (temp1 < test.n())
+			cout << temp1+1<< "->";
+		while (test.next(temp, temp1)<test.n())
+		{
+			cout << test.next(temp, temp1)+1<<"->";
+			temp1 = test.next(temp, temp1);
+		}
+		cout << "/" << endl;
+	}
+		*/
+		
 	cout << endl;
 	//cout << test.first(4);
 	//cout << "从节点1开始DFS:";

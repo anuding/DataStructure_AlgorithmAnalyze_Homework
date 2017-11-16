@@ -14,11 +14,6 @@ private:
 	int numVertex, numEdge; // Number of vertices, edges
 	int *mark; // Pointer to mark array
 public:
-	void printgrpah()
-	{
-		for (int i = 0; i<numVertex; i++)
-			vertex[i]->print();
-	}
 	Graphl(int numVert)
 	{
 		Init(numVert);
@@ -53,8 +48,7 @@ public:
 	int next(int v, int w) {
 		Edge it;
 		if (isEdge(v, w)) {
-			if ((vertex[v]->currPos() + 1) < vertex[v]->length())
-			{
+			if ((vertex[v]->currPos() + 1) < vertex[v]->length()) {
 				vertex[v]->next();
 				it = vertex[v]->getValue();
 				return it.vertex();

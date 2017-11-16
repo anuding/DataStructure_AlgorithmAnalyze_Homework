@@ -1,6 +1,9 @@
 ﻿// Implementation for the adjacency matrix representation
 #include "Graph.h"
 #include <assert.h>
+#include <iostream>
+#include <iomanip>
+using namespace std;
 #define UNVISITED 0;
 #define VISITED 1;
 class Graphm : public Graph {
@@ -9,6 +12,15 @@ private:
 	int **matrix; // Pointer to adjacency matrix
 	int *mark; // Pointer to mark array
 public:
+	void print()
+	{
+		for (int i = 0; i < numVertex; i++) // Initialize to 0 weights
+		{
+			for (int j = 0; j < numVertex; j++)
+				cout << setw(4)<< matrix[i][j]<<" ";
+			cout << endl;
+		}
+	}
 	Graphm(int numVert) // Constructor
 	{
 		Init(numVert);

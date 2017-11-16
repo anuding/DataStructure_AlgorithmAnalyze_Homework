@@ -20,7 +20,6 @@ public:
 	virtual void moveToStart() = 0;
 	// Set the current position to the end of the list
 	virtual void moveToEnd() = 0;
-	virtual void print() = 0;
 	// Move the current position one step left. No change
 	// if already at beginning.
 	virtual void prev() = 0;
