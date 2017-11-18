@@ -10,9 +10,17 @@ using namespace std;
 int main()
 {
 	void DijkstrawithQ(Graph* G, int* D, int s);
-	void Dijkstra(Graphl* G, int *D, int s);
+	void Dijkstra(Graphl* G, int *D,int *par, int s);
 	int minVertex(Graphl* G, int *D);
 	Graphl g1(6);
+	/*g1.setEdge(0, 1, 10);
+	g1.setEdge(0, 2, 3);
+	g1.setEdge(0, 3, 20);
+	g1.setEdge(2, 1, 2);
+	g1.setEdge(1, 3, 5);
+	g1.setEdge(3, 4, 11);
+	g1.setEdge(2, 4, 15);
+*/
 	g1.setEdge(0, 1, 10);
 	g1.setEdge(0, 5, 2);
 	g1.setEdge(0, 3, 20);
@@ -22,10 +30,10 @@ int main()
 	g1.setEdge(3, 5, 10);
 	g1.setEdge(3, 4, 11);
 	g1.setEdge(5, 4, 3);
-	int *D,s=0;
+	int *D,*par,s=0;
 	D = new int[g1.n()];
-
-	Dijkstra(&g1, D, s);
+	par = new int[g1.n()];
+	Dijkstra(&g1, D,par, s);
 	for (int i = 0; i < g1.n(); i++)
 		cout << D[i] << " ";
 	getchar();
@@ -43,19 +51,37 @@ int minVertex(Graphl* G, int* D) { // Find min cost vertex
 	return v;
 }
 
-void Dijkstra(Graphl* G, int* D, int s) {
+void Dijkstra(Graphl* G, int* D, int* par,int s) 
+{//从s开始计算最短路径
 	int i, v, w;
-	for (int i = 0; i<G->n(); i++) // Initialize
-		D[i] = INFINITY;
-	D[0] = 0;
+	for (int i = 0; i < G->n(); i++) // Initialize
+	{
+		D[i] = 65535;
+	}
+	par[s] = -1;
+	D[s] = 0;
 	for (i = 0; i<G->n(); i++)
 	{ // Process the vertices
 		v = minVertex(G, D);
-		if (D[v] == INFINITY) return; // Unreachable vertices
+		if (D[v] == 65535) return; // Unreachable vertices
 		G->setMark(v, VISITED);
-		for (w = G->first(v); w<G->n(); w = G->next(v, w))
-			if (D[w] >(D[v] + G->weight(v, w)))
+		for (w = G->first(v); w < G->n(); w = G->next(v, w))
+		{
+			if (D[w] > (D[v] + G->weight(v, w)))
+			{
 				D[w] = D[v] + G->weight(v, w);
+				par[w] = v;
+			}
+			
+		}
+	}
+	// Print out the paths (in reverse order)
+	int t;
+	for (i = 0; i<G->n(); i++) {
+		cout << "Path for " << i+1 << ": ";
+		for (t = i; par[t] != -1; t =par[t])
+			cout << t+1 << " ";
+		cout << s+1 << "\n";
 	}
 }
 
@@ -88,3 +114,5 @@ void Dijkstra(Graphl* G, int* D, int s) {
 //			}
 //	}
 //}
+
+

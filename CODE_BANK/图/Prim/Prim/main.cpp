@@ -20,7 +20,12 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include "Graphl.h"
+#define UNVISITED 0
+#define VISITED 1
 using namespace std;
+
+
+Graphl MST(5);
 int main()
 {
 
@@ -45,6 +50,12 @@ int main()
     return 0;
 }
 
+void AddEdgetoMST(int V, int v)
+{
+	MST.setEdge(0, v, 1);
+}
+
+
 int minVertex(Graphl* G, int *D)//找到最小节点
 {
 	int i, v = -1;//初始化v为未访问节点
@@ -58,7 +69,7 @@ int minVertex(Graphl* G, int *D)//找到最小节点
 
 void Prim(Graphl* G, int* D, int s)
 {
-	int V[G->n()];
+	int V[5];
 	int i, w;
 	for (i = 0; i < G->n(); i++)
 	{
@@ -67,7 +78,7 @@ void Prim(Graphl* G, int* D, int s)
 		if (v != s)
 			AddEdgetoMST(V[v], v);
 		if (D[v] == INFINITY)	return;
-		if (w = G->first(v); w < G->n();w=G->next(v,w))
+		for (w = G->first(v); w < G->n();w=G->next(v,w))
 			if (D[w] > G->weight(v, w))
 			{
 				D[w] = G->weight(v, w);
