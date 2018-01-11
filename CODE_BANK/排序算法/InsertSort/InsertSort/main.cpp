@@ -19,7 +19,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 //#define N 100000000
-#define N 100000
+#define N 150
 static long long int swaptimes=0;
 static long long int comparetimes = 0;
 static double totaltime;
@@ -87,6 +87,7 @@ int main()
 	cout << "最差情况下:" << endl;
 	printresult();
 	cout << endl;
+	getchar();
 	return 0;
 }
 

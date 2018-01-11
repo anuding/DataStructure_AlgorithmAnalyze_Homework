@@ -19,7 +19,7 @@
 #include<time.h>
 #include<stdio.h>
 #include<stdlib.h>
-#define N 100000
+#define N 1000
 static long long int swaptimes = 0;
 static long long int comparetimes = 0;
 static double totaltime;
@@ -88,6 +88,7 @@ int main()
 
 	/*for (int i = 0; i < N; i++)
 		cout<<ori[i]<<" ";*/
+	getchar();
 	return 0;
 }
 

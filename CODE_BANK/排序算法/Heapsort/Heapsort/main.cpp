@@ -6,7 +6,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include "maxheap.h"
-#define N 100000
+#define N 1000
 static long long int swaptimes = 0;
 static long long int comparetimes = 0;
 static double totaltime;
@@ -72,9 +72,11 @@ int main()
 	cout << "最差情况下:" << endl;
 	printresult();
 	//为什么最差的和最好的结果反了?
-	for (int i = 0; i < N; i++)
-		cout<<ori[i]<<" ";
+	/*for (int i = 0; i < N; i++)
+		cout<<ori[i]<<" ";*/
+	getchar();
 	return 0;
+
 }
 
 void printresult()
