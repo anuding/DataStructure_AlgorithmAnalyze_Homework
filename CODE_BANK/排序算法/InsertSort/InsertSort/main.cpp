@@ -19,7 +19,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 //#define N 100000000
-#define N 150
+#define N 10000
 static long long int swaptimes=0;
 static long long int comparetimes = 0;
 static double totaltime;
@@ -28,10 +28,10 @@ static clock_t start, finish;
 using namespace std;
 
 template<typename E>
-void insertsort(E A[], int n)
+void insertsort(E A[], int n)//插入排序,传入待排序序列和序列的大小
 {
 	for (int i = 1; i < n; i++)
-		for (int j = i; (comparetimes++) && (j > 0) && (A[j] < A[j - 1]); j--)
+		for (int j = i; (comparetimes++) && (j > 0) && (A[j] < A[j - 1]); j--)//未排序元素与之前排序好的进行比较
 		{
 			swap(A[j], A[j - 1]);
 			swaptimes++;

@@ -2,19 +2,19 @@
 #include <assert.h>
 template <typename E, typename Comp> class heap {
 private:
-	E* Heap; // Pointer to the heap array
-	int maxsize; // Maximum size of the heap
-	int n; // Number of elements now in the heap
-		   // Helper function to put element in its correct place
-	void siftdown(int pos) {
-		while (!isLeaf(pos)) { // Stop if pos is a leaf
+	E* Heap; 
+	int maxsize; //堆所能容纳的最大元素数
+	int n; // 堆中目前的元素数量
+		   
+	void siftdown(int pos) {// 调整堆
+		while (!isLeaf(pos)) { 
 			int j = leftchild(pos); int rc = rightchild(pos);
 			if ((comparetimes++)&&(rc < n) && (Heap[rc]> Heap[j]))
-				j = rc; // Set j to greater child’s value
-			if ((comparetimes++) && Heap[pos]> Heap[j]) return; // Done
+				j = rc; 
+			if ((comparetimes++) && Heap[pos]> Heap[j]) return; 
 			swap(Heap[pos], Heap[j]);
 			swaptimes++;
-			pos = j; // Move down
+			pos = j;
 		}
 	}
 public:
@@ -62,10 +62,10 @@ public:
 	// Remove first value
 	E removefirst() {
 		assert(n > 0, "Heap is empty");
-		swap(Heap[0], Heap[--n]); // Swap first with last value
+		swap(Heap[0], Heap[--n]); //根节点与最后的节点交换
 		swaptimes++;
-		if (n != 0) siftdown(0); // Siftdown new root val
-		return Heap[n]; // Return deleted value
+		if (n != 0) siftdown(0); // 删除后要调整堆
+		return Heap[n]; // 返回原先根节点的值
 	}
 	// Remove and return element at specified position
 	E remove(int pos) {

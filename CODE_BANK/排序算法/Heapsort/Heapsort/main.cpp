@@ -6,7 +6,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include "maxheap.h"
-#define N 1000
+#define N 10000
 static long long int swaptimes = 0;
 static long long int comparetimes = 0;
 static double totaltime;
@@ -15,11 +15,11 @@ static clock_t start, finish;
 using namespace std;
 
 template <typename E>
-void heapsort(E A[], int n) { // Heapsort
+void heapsort(E A[], int n) { //传入待排序序列和序列的大小
 	E maxval;
-	heap<E, int> H(A, n, n); // Build the heap
-	for (int i = 0; i<n; i++) // Now sort
-		maxval = H.removefirst(); // Place maxval at end
+	heap<E, int> H(A, n, n); // 建堆
+	for (int i = 0; i<n; i++) // 排序
+		maxval = H.removefirst();
 }
 
 int main()
@@ -29,10 +29,8 @@ int main()
 	int *ori, *temp;
 	ori = new int[N];//存放在堆上
 	srand((unsigned)time(NULL)); //用当前系统时间设置种子
-
-
-								 //平均情况
-	for (int i = 0; i < N; i++)
+								
+	for (int i = 0; i < N; i++) //平均情况
 	{
 		int k = rand() % (N + 1);
 		ori[i] = k;
@@ -46,11 +44,9 @@ int main()
 	cout << endl;
 
 
-
-
 	//最好情况
-	for (int i = 0; i < N; i++)
-		ori[i] = i;
+	for (int i = 0, k = N; i < N; i++, k--)
+		ori[i] = k;
 	start = clock();
 	heapsort<int>(ori, N);
 	finish = clock();
@@ -59,21 +55,15 @@ int main()
 	cout << endl;
 
 
-
-
-
-
 	//最差情况
-	for (int i = 0, k = N; i < N; i++, k--)
-		ori[i] = k;
+	for (int i = 0; i < N; i++)
+		ori[i] = i;
 	start = clock();
 	heapsort<int>(ori, N);
 	finish = clock();
 	cout << "最差情况下:" << endl;
 	printresult();
-	//为什么最差的和最好的结果反了?
-	/*for (int i = 0; i < N; i++)
-		cout<<ori[i]<<" ";*/
+	
 	getchar();
 	return 0;
 

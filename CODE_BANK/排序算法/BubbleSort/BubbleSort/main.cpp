@@ -19,7 +19,7 @@
 #include<time.h>
 #include<stdio.h>
 #include<stdlib.h>
-#define N 1000
+#define N 10000
 static long long int swaptimes = 0;
 static long long int comparetimes = 0;
 static double totaltime;
@@ -28,12 +28,12 @@ static clock_t start, finish;
 using namespace std;
 
 template <typename E>
-void bubsort(E A[], int n) { // Bubble Sort
-	for (int i = 0; i<n - 1; i++) // Bubble up i’th record
+void bubsort(E A[], int n) { //传入待排序序列和序列的大小
+	for (int i = 0; i<n - 1; i++) 
 		for (int j = n - 1; j>i; j--)
 			if( (comparetimes++)&&(A[j] > A[j - 1]))
 			{
-				swap(A[j], A[j - 1]);
+				swap(A[j], A[j - 1]);//直接交换
 				swaptimes++;
 			}
 }
@@ -74,8 +74,6 @@ int main()
 
 
 
-
-
 	//最差情况
 	for (int i = 0; i < N; i++)
 		ori[i] = i;
@@ -86,8 +84,6 @@ int main()
 	printresult();
 	cout << endl;
 
-	/*for (int i = 0; i < N; i++)
-		cout<<ori[i]<<" ";*/
 	getchar();
 	return 0;
 }

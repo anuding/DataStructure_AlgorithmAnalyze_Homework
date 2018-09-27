@@ -18,7 +18,7 @@
 #include<time.h>
 #include<stdio.h>
 #include<stdlib.h>
-#define N 1000
+#define N 10000
 static long long int swaptimes = 0;
 static long long int comparetimes = 0;
 static double totaltime;
@@ -27,18 +27,17 @@ static clock_t start, finish;
 using namespace std;
 
 template <typename E>
-void selsort(E A[], int n) { // Selection Sort
-	for (int i = 0; i<n - 1; i++) { // Select i’th record
-		int lowindex = i; // Remember its index
-		for (int j = n - 1; j>i; j--) // Find the least value
+void selsort(E A[], int n) { //传入待排序序列和序列的大小
+	for (int i = 0; i<n - 1; i++) { 
+		int lowindex = i; // 保存记录
+		for (int j = n - 1; j>i; j--) // 在未排序元素中寻找最大的
 			if ((comparetimes++)&&(A[j]> A[lowindex]))
-				lowindex = j; // Put it in place
-		swap(A[i], A[lowindex]);
+				lowindex = j; // 只替换记录
+		swap(A[i], A[lowindex]);//结束循环后才进行交换值
 		swaptimes++;
 	}
 
 }
-
 
 
 int main()
@@ -48,10 +47,8 @@ int main()
 	int *ori, *temp;
 	ori = new int[N];//存放在堆上
 	srand((unsigned)time(NULL)); //用当前系统时间设置种子
-
-
-								 //平均情况
-	for (int i = 0; i < N; i++)
+						
+	for (int i = 0; i < N; i++)	 //平均情况
 	{
 		int k = rand() % (N + 1);
 		ori[i] = k;
